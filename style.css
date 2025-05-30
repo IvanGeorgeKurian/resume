@@ -2,11 +2,14 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 2rem;
-      background-color: #fff;
+      background-color: #e8f0fe; /* Light background for contrast */
+
       color: #000;
       max-width: 900px;
       margin: auto;
     }
+
+
     header {
       text-align: center;
       color: #004f90;
@@ -75,3 +78,18 @@
       .contact-info a:hover {
         text-decoration-color: #004182; /* Optional: darker blue on hover */
       }
+      
+.resume-container {
+  border: 1.5px solid #004f90;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  padding: 2rem;
+  background-color: #fff;
+  max-width: 900px;
+  margin: 2rem auto;
+  border-radius: 8px;
+}
+      
+
+
+     
+ 
