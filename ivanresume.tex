@@ -1,307 +1,131 @@
-% AUTHOR: Sina Atalay
-% LICENSE: https://github.com/sinaatalay/rendercv/blob/main/LICENSE
-
-\documentclass[12pt, letterpaper]{article}
-
-% Packages:
-\usepackage[
-        ignoreheadfoot, % set margins without considering header and footer
-        top=2 cm, % seperation between body and page edge from the top
-        bottom=2 cm, % seperation between body and page edge from the bottom
-        left=2 cm, % seperation between body and page edge from the left
-        right=2 cm, % seperation between body and page edge from the right
-        footskip=1.0 cm, % seperation between body and footer
-        % showframe % for debugging 
-    ]{geometry} % for adjusting page geometry
-\usepackage[explicit]{titlesec} % for customizing section titles
-\usepackage{tabularx} % for making tables with fixed width columns
-\usepackage{array} % tabularx requires this
-\usepackage[dvipsnames]{xcolor} % for coloring text
-\definecolor{primaryColor}{RGB}{0, 79, 144} % define primary color
-\usepackage{enumitem} % for customizing lists
-\usepackage{fontawesome5} % for using icons
-\usepackage{amsmath} % for math
-\usepackage[
-    pdftitle={Ivan George's CV},
-    pdfauthor={Ivan George},
-    colorlinks=true,
-    urlcolor=primaryColor
-]{hyperref} % for links, metadata and bookmarks
-\usepackage[pscoord]{eso-pic} % for floating text on the page
-\usepackage{calc} % for calculating lengths
-\usepackage{bookmark} % for bookmarks
-\usepackage{lastpage} % for getting the total number of pages
-\usepackage[default, type1]{sourcesanspro} % for using source sans 3 font
-\usepackage{ifthen}
-
-% Some settings:
-\pagestyle{empty} % no header or footer
-\setcounter{secnumdepth}{0} % no section numbering
-\setlength{\parindent}{0pt} % no indentation
-\setlength{\topskip}{0pt} % no top skip
-\makeatletter
-\let\ps@customFooterStyle\ps@plain % Copy the plain style to customFooterStyle
-\patchcmd{\ps@customFooterStyle}{\thepage}{
-  %  \color{gray}\textit{\small Ivan George - Page \thepage{} of \pageref*{LastPage}}
-}{}{} % replace number by desired string
-\makeatother
-\pagestyle{customFooterStyle}
-
-\titleformat{\section}{
-        % make the font size of the section title large and color it with the primary color
-        \Large\color{primaryColor}
-    }{
-    }{
-    }{
-        % print bold title, give 0.15 cm space and draw a line of 0.8 pt thickness
-        % from the end of the title to the end of the body
-        \textbf{#1}\hspace{0.15cm}\titlerule[0.8pt]\hspace{-0.1cm}
-    }[] % section title formatting
-
-\titlespacing{\section}{
-        % left space:
-        0pt
-    }{
-        % top space:
-        0.3 cm
-    }{
-        % bottom space:
-        0.2 cm
-    } % section title spacing
-
-\newcolumntype{L}[1]{
-    >{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}p{#1}
-} % left-aligned fixed width column type
-\newcolumntype{R}[1]{
-    >{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}p{#1}
-} % right-aligned fixed width column type
-\newcolumntype{K}[1]{
-    >{\let\newline\\\arraybackslash\hspace{0pt}}X
-} % justified flexible width column type
-\setlength\tabcolsep{-1.5pt} % no space between columns
-\newenvironment{highlights}{
-        \begin{itemize}[
-                topsep=0pt,
-                parsep=0.10 cm,
-                partopsep=0pt,
-                itemsep=0pt,
-                after=\vspace{-1\baselineskip},
-                leftmargin=0.4 cm + 3pt
-            ]
-    }{
-        \end{itemize}
-    } % new environment for highlights
-
-\newenvironment{header}{
-        \setlength{\topsep}{0pt}\par\kern\topsep\centering\color{primaryColor}\linespread{1.5}
-    }{
-        \par\kern\topsep
-    } % new environment for the header
-
-\newcommand{\placelastupdatedtext}{% \placetextbox{<horizontal pos>}{<vertical pos>}{<stuff>}
-  \AddToShipoutPictureFG*{% Add <stuff> to current page foreground
-    \put(
-        \LenToUnit{\paperwidth-2 cm-0.2 cm+0.05cm},
-        \LenToUnit{\paperheight-1.0 cm}
-    ){\vtop{{\null}\makebox[0pt][c]{
-        \small\color{gray}\textit{}\hspace{\widthof{}}
-    }}}%
-  }%
-}%
-
-% save the original href command in a new command:
-\let\hrefWithoutArrow\href
- % new command for external links:
-\renewcommand{\href}[2]{\hrefWithoutArrow{#1}{\mbox{\ifthenelse{\equal{#2}{}}{ }{#2 }\raisebox{.15ex}{\footnotesize \faExternalLink*}}}}
-
-\let\originalTabularx\tabularx
-\let\originalEndTabularx\endtabularx
-
-\renewenvironment{tabularx}{\bgroup\centering\originalTabularx}{\originalEndTabularx\par\egroup}
-
-% For TextEntrys (see https://tex.stackexchange.com/a/600/287984):
-\def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1\topsep=0pt\itemsep=0pt\parsep=0pt\parskip=0pt\labelwidth=0pt\itemindent=0pt\labelsep=0pt}\item[]}
-\let\endchangemargin=\endlist 
-
-% Ensure that generate pdf is machine readable/ATS parsable
-\pdfgentounicode=1
-
-\begin{document}
-    \placelastupdatedtext
-    \begin{header}
-        \fontsize{30 pt}{30 pt}
-        \textbf{Ivan George}
-
-        \vspace{0.3 cm}
-
-        \normalsize
-        \mbox{\hrefWithoutArrow{tel:+91 7738131649}{{\footnotesize\faPhone*}\hspace*{0.13cm}+91 7738131649}}
-        \hspace*{0.5 cm}
-        \mbox{\hrefWithoutArrow{mailto:ivanthoppil@gmail.com}{{\small\faEnvelope[regular]}\hspace*{0.13cm}ivanthoppil@gmail.com}}
-        \hspace*{0.5 cm}
-       
-        \mbox{\hrefWithoutArrow{https://linkedin.com/in/ivan-george-kurian}{{\small\faLinkedinIn}\hspace*{0.13cm}ivangeorgekurian}}
-        \hspace*{0.5 cm}
-      
-    \end{header}
-
-    \vspace{0.3 cm}
-
-
-    \section{Summary}
-
-        \begin{changemargin}{0.2 cm}{0.2 cm}
-        Aspiring Computer Engineering student seeking an opportunity to contribute my skills and computer science knowledge. Eager to learn and grow in a dynamic environment.
-        
-        \end{changemargin}
-
-
-
-
-
-    
-    \section{Education}
-
-        \begin{tabularx}{
-            \textwidth-0.4 cm-0.13cm
-        }{
-            L{1.5cm}
-            K{0.2 cm}
-            R{4.1 cm}
-        }
-            \textbf{HSC}
-            &
-            \textbf{St. Xavier's College}
-
-            \vspace{0.10 cm}
-
-            \begin{highlights}
-                \item GPA: 8.6
-            \end{highlights}
-            &
-            
-
-            Aug. 2019 to Mar. 2021
-        \end{tabularx}
-
-
-        \begin{tabularx}{
-            \textwidth-0.4 cm-0.13cm
-        }{
-            L{1.5cm}
-            K{0.2 cm}
-            R{4.1 cm}
-        }
-            \textbf{B.E}
-            &
-            \textbf{Fr. C. Rodrigues Institute of Technology}, Computer Science
-
-            \vspace{0.10 cm}
-
-            \begin{highlights}
-                \item GPA: 7.7 
-            \end{highlights}
-            &
-            
-
-            Nov. 2021 to Apr. 2025
-        \end{tabularx}
-
-
-    
-    \section{Experience}
-
-        \begin{tabularx}{
-            \textwidth-0.4 cm-0.13cm
-        }{
-            K{0.2 cm}
-            R{4.1 cm}
-        }
-            \textbf{Tata Institute of Fundamental Research}, Intern
-
-            \vspace{0.10 cm}
-
-            \begin{highlights}
-                \item Worked on the Transport Facility Registration Module which was a database driven web based application in PHP and HTML platform.
-            \end{highlights}
-            &
-             Mumbai
-
-            Dec.2023 - Jan. 2024
-
-            1 month
-        \end{tabularx}
-
-        
-
-
- 
-
-
-    
-    \section{Projects}
-
-        \begin{tabularx}{
-            \textwidth-0.4 cm-0.13cm
-        }{
-            K{0.2 cm}
-            R{4.1 cm}
-        }
-            \textbf{Source Code Optimizer}
-
-            \vspace{0.10 cm}
-
-            \begin{highlights}
-                \item Understanding the working and processes in the GCC compiler by building and compiling GCC source code and adding a new working pass to the built Compiler.
-            \end{highlights}
-            &
-            
-
-            Apr. 2023
-        \end{tabularx}
-
-
-        \vspace{0.2 cm}
-        \begin{tabularx}{
-            \textwidth-0.4 cm-0.13cm
-        }{
-            K{0.2 cm}
-            R{4.1 cm}
-        }
-            \textbf{Home Service System}
-
-            \vspace{0.10 cm}
-
-            \begin{highlights}
-                \item Addressing the challenges and inefficiencies associated with coordinating and managing various home services for individuals or households.
-                \item Used JavaScript, HTML, CSS.
-            \end{highlights}
-            &
-            
-
-            Apr. 2024
-        \end{tabularx}
-
-
-        \vspace{0.2 cm}
-
-    
-    \section{Technologies}
-
-        \begingroup\leftskip=0.2 cm
-        \advance\csname @rightskip\endcsname 0.2 cm
-        \advance\rightskip 0.2 cm
-
-        \textbf{Languages:} Python, C++, C, Java, PHP,CSS , SQL, JavaScript \par\endgroup
-
-        \vspace{0.2 cm}
-        \begingroup\leftskip=0.2 cm
-        \advance\csname @rightskip\endcsname 0.2 cm
-        \advance\rightskip 0.2 cm
-
-        \textbf{Software:} Visual Studio, MySQL Server, Eclipse, XAMPP  \par\endgroup
-
-
-    
-
-\end{document}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Ivan George">
+  <meta name="description" content="Resume of Ivan George">
+  <title>Ivan George - Resume</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background-color: #fff;
+      color: #000;
+      max-width: 900px;
+      margin: auto;
+    }
+    header {
+      text-align: center;
+      color: #004f90;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .contact-info i {
+      margin-right: 0.3rem;
+    }
+    .contact-info span {
+      margin-right: 1.5rem;
+    }
+    section {
+      margin-top: 2rem;
+    }
+    section h2 {
+      color: #004f90;
+      border-bottom: 2px solid #004f90;
+      padding-bottom: 0.3rem;
+      margin-bottom: 1rem;
+    }
+    .item {
+      margin-bottom: 1.5rem;
+    }
+    .item-title {
+      font-weight: bold;
+    }
+    .sub-title {
+      font-style: italic;
+    }
+    .date-location {
+      font-size: 0.9rem;
+      color: #666;
+    }
+    ul {
+      margin: 0.5rem 0 0 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Ivan George</h1>
+    <div class="contact-info">
+      <span><i class="fas fa-phone"></i> +91 7738131649</span>
+      <span><i class="fas fa-envelope"></i> ivanthoppil@gmail.com</span>
+      <span><i class="fab fa-linkedin"></i> <a href="https://linkedin.com/in/ivan-george-kurian">ivangeorgekurian</a></span>
+    </div>
+  </header>
+
+  <section>
+    <h2>Summary</h2>
+    <p>Aspiring Computer Engineering student seeking an opportunity to contribute my skills and computer science knowledge. Eager to learn and grow in a dynamic environment.</p>
+  </section>
+
+  <section>
+    <h2>Education</h2>
+    <div class="item">
+      <div class="item-title">HSC - St. Xavier's College</div>
+      <div class="date-location">Aug. 2019 – Mar. 2021</div>
+      <ul>
+        <li>GPA: 8.6</li>
+      </ul>
+    </div>
+    <div class="item">
+      <div class="item-title">B.E - Fr. C. Rodrigues Institute of Technology</div>
+      <div class="sub-title">Computer Science</div>
+      <div class="date-location">Nov. 2021 – Apr. 2025</div>
+      <ul>
+        <li>GPA: 7.7</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Experience</h2>
+    <div class="item">
+      <div class="item-title">Tata Institute of Fundamental Research - Intern</div>
+      <div class="date-location">Dec. 2023 – Jan. 2024 | Mumbai</div>
+      <ul>
+        <li>Worked on the Transport Facility Registration Module which was a database driven web-based application in PHP and HTML platform.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Projects</h2>
+    <div class="item">
+      <div class="item-title">Source Code Optimizer</div>
+      <div class="date-location">Apr. 2023</div>
+      <ul>
+        <li>Understanding the working and processes in the GCC compiler by building and compiling GCC source code and adding a new working pass to the built Compiler.</li>
+      </ul>
+    </div>
+    <div class="item">
+      <div class="item-title">Home Service System</div>
+      <div class="date-location">Apr. 2024</div>
+      <ul>
+        <li>Addressing the challenges and inefficiencies associated with coordinating and managing various home services for individuals or households.</li>
+        <li>Used JavaScript, HTML, CSS.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Technologies</h2>
+    <p><strong>Languages:</strong> Python, C++, C, Java, PHP, CSS, SQL, JavaScript</p>
+    <p><strong>Software:</strong> Visual Studio, MySQL Server, Eclipse, XAMPP</p>
+  </section>
+</body>
+</html>
